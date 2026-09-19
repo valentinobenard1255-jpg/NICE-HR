@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: peoplepilot-hr
+    runtime: node
+    plan: 0.5c-512mb
+    buildCommand: corepack enable && corepack prepare pnpm@11.24.0 --activate && pnpm install --frozen-lockfile
+    startCommand: pnpm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_FILE
+        value: /opt/render/project/src/data/peoplepilot.sqlite
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: MANAGER_EMAIL
+        sync: false
+      - key: MANAGER_PASSWORD
+        sync: false
+      - key: EMPLOYEE_EMAIL
+        sync: false
+      - key: EMPLOYEE_PASSWORD
+        sync: false
+      - key: SUPER_ADMIN_EMAIL
+        sync: false
+      - key: SUPER_ADMIN_PASSWORD
+        sync: false
+    disk:
+      name: peoplepilot-data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1

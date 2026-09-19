@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PeoplePilot HR — Workforce Management</title>
+  <meta name="description" content="PeoplePilot HR workforce management dashboard prototype" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <section class="login-screen" id="loginScreen" aria-label="Sign in">
+    <div class="login-decoration decoration-one"></div><div class="login-decoration decoration-two"></div>
+    <div class="login-card">
+      <div class="login-brand"><div class="brand-mark">P</div><div class="brand-copy"><strong>PeoplePilot</strong><span>HR workspace</span></div></div>
+      <div class="login-heading"><p class="eyebrow">Secure workspace</p><h1>Welcome back</h1><p class="muted">Sign in to manage your people, payroll and time off.</p></div>
+      <form id="loginForm" class="login-form">
+        <label>Email address<input id="loginEmail" name="email" type="email" autocomplete="username" placeholder="you@company.com" required /></label>
+        <label>Password<div class="password-input"><input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required /><button type="button" id="togglePassword" aria-label="Show password">Show</button></div></label>
+        <div class="login-options"><label class="checkbox-label"><input type="checkbox" id="rememberMe" /> <span>Remember me</span></label><a href="#" id="forgotPassword">Forgot password?</a></div>
+        <button class="btn btn-primary login-submit" type="submit" id="loginSubmit">Sign in <span>→</span></button>
+        <p class="login-error" id="loginError" role="alert"></p>
+      </form>
+      <p class="login-demo">Demo admin: <strong>sebayuyu@gmail.com</strong> · <strong>12345</strong></p>
+  
+    </div>
+  </section>
+  <div class="app-shell" id="appShell" hidden>
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-row">
+        <div class="brand-mark">P</div>
+        <div class="brand-copy"><strong>PeoplePilot</strong><span>HR workspace</span></div>
+        <button class="icon-btn mobile-close" id="closeSidebar" aria-label="Close menu">×</button>
+      </div>
+
+      <div class="workspace-switcher">
+        <div class="workspace-logo">NS</div>
+        <div><strong>Northstar Studio</strong><span>Company workspace</span></div>
+        <span class="chevron">⌄</span>
+      </div>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <p class="nav-label">Workspace</p>
+        <button class="nav-item active" data-view="overview"><span class="nav-icon">⌂</span>Overview</button>
+        <button class="nav-item" data-view="employees"><span class="nav-icon">♙</span>Employees <span class="nav-count">22</span></button>
+        <button class="nav-item" data-view="attendance"><span class="nav-icon">◷</span>Attendance</button>
+        <button class="nav-item" data-view="leave"><span class="nav-icon">◫</span>Leave</button>
+        <button class="nav-item" data-view="payroll"><span class="nav-icon">▤</span>Payroll</button>
+        <button class="nav-item" data-view="reports"><span class="nav-icon">◒</span>Reports</button>
+        <p class="nav-label nav-label-bottom">Manage</p>
+        <button class="nav-item" data-view="settings"><span class="nav-icon">⚙</span>Settings</button>
+        <button class="nav-item" data-view="users" id="usersNavItem"><span class="nav-icon">♧</span>Users &amp; permissions</button>
+      </nav>
+
+      <div class="sidebar-help">
+        <div class="help-icon">?</div>
+        <div><strong>Need a hand?</strong><span>Explore the help center</span></div>
+        <span class="arrow">↗</span>
+      </div>
+      <div class="user-mini">
+        <div class="avatar avatar-indigo" id="sidebarUserAvatar">AM</div>
+        <div><strong id="sidebarUserName">Alex Morgan</strong><span id="sidebarUserRole">HR Administrator</span></div>
+        <button class="more-btn" id="sidebarLogoutBtn" aria-label="Log out">↪</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-btn menu-toggle" id="openSidebar" aria-label="Open menu">☰</button>
+        <div class="breadcrumb"><span>Workspace</span><b>/</b><strong id="breadcrumbCurrent">Overview</strong></div>
+        <div class="top-actions">
+          <button class="icon-btn notification-btn" aria-label="Notifications"><span>♧</span><i></i></button>
+          <div class="top-user"><div class="avatar avatar-indigo" id="topUserAvatar">AM</div><span id="topUserName">Alex Morgan</span><span class="chevron">⌄</span><button class="logout-btn" id="logoutBtn">Log out</button></div>
+        </div>
+      </header>
+
+      <div class="page-wrap">
+        <section class="view active" id="view-overview">
+          <div class="page-heading">
+            <div><p class="eyebrow" id="currentDate">Monday, September 19, 2026</p><h1>Good morning, Alex <span class="wave">✦</span></h1><p class="muted">Here is what is happening with your team today.</p></div>
+            <div class="heading-actions"><button class="btn btn-secondary" data-view-target="reports"><span>↗</span> Export report</button><button class="btn btn-primary" id="overviewAddEmployee"><span>＋</span> Add employee</button></div>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card blue-card"><div class="metric-top"><span class="metric-label">Total employees</span><span class="metric-icon">♙</span></div><strong class="metric-value" id="totalEmployees">22</strong><div class="metric-foot"><span class="trend up">↗ 8.3%</span><span>vs last month</span></div></article>
+            <article class="metric-card green-card"><div class="metric-top"><span class="metric-label">Present today</span><span class="metric-icon">◷</span></div><strong class="metric-value" id="presentEmployees">18</strong><div class="metric-foot"><span class="trend up">↗ 4.5%</span><span>vs yesterday</span></div></article>
+            <article class="metric-card peach-card"><div class="metric-top"><span class="metric-label">On leave</span><span class="metric-icon">◫</span></div><strong class="metric-value" id="leaveEmployees">2</strong><div class="metric-foot"><span class="trend neutral">— 0.0%</span><span>vs last month</span></div></article>
+            <article class="metric-card purple-card"><div class="metric-top"><span class="metric-label">Payroll this month</span><span class="metric-icon">▤</span></div><strong class="metric-value" id="payrollTotal">$48,650</strong><div class="metric-foot"><span class="trend up">↗ 6.2%</span><span>vs last month</span></div></article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel attendance-panel"><div class="panel-header"><div><h2>Attendance overview</h2><p class="muted">Team attendance for today</p></div><button class="text-btn" data-view-target="attendance">View details <span>→</span></button></div><div class="attendance-content"><div class="donut-wrap"><div class="donut"><div><strong id="attendancePercent">82%</strong><span>Present</span></div></div><div class="donut-legend"><span><i class="dot dot-green"></i> Present <b id="legendPresent">18</b></span><span><i class="dot dot-yellow"></i> Late <b>2</b></span><span><i class="dot dot-gray"></i> Absent <b id="legendAbsent">2</b></span></div></div><div class="attendance-bars"><div class="bar-row"><div><span>Present</span><b>18 employees</b></div><div class="progress"><i class="progress-green" style="width:82%"></i></div><em>82%</em></div><div class="bar-row"><div><span>Late arrival</span><b>2 employees</b></div><div class="progress"><i class="progress-yellow" style="width:9%"></i></div><em>9%</em></div><div class="bar-row"><div><span>Absent</span><b>2 employees</b></div><div class="progress"><i class="progress-gray" style="width:9%"></i></div><em>9%</em></div><div class="attendance-note"><span class="note-check">✓</span><span><strong>Great start!</strong><br>Attendance is above your monthly average.</span></div></div></div></article>
+            <article class="panel leave-panel"><div class="panel-header"><div><h2>Leave requests</h2><p class="muted">Waiting for your review</p></div><button class="text-btn" data-view-target="leave">View all <span>→</span></button></div><div class="leave-list" id="overviewLeaveList"></div><button class="btn btn-soft full-btn" id="overviewRequestLeave">＋ Request leave</button></article>
+          </div>
+
+          <div class="panel activity-panel"><div class="panel-header"><div><h2>Recent activity</h2><p class="muted">Latest updates across your workspace</p></div><button class="filter-btn">This week <span>⌄</span></button></div><div class="activity-list"><div class="activity-row"><div class="activity-icon icon-blue">♙</div><div class="activity-copy"><strong>New employee added</strong><span>Jordan Lee was added to the Design team</span></div><time>12 min ago</time></div><div class="activity-row"><div class="activity-icon icon-green">✓</div><div class="activity-copy"><strong>Leave request approved</strong><span>Annual leave for Maya Patel was approved</span></div><time>1 hr ago</time></div><div class="activity-row"><div class="activity-icon icon-purple">▤</div><div class="activity-copy"><strong>Payroll draft generated</strong><span>September payroll is ready for review</span></div><time>3 hrs ago</time></div><div class="activity-row"><div class="activity-icon icon-orange">⌁</div><div class="activity-copy"><strong>Profile updated</strong><span>Sam Wilson updated their emergency contact</span></div><time>Yesterday</time></div></div></div>
+        </section>
+
+        <section class="view" id="view-employees"><div class="page-heading compact"><div><p class="eyebrow">People directory</p><h1>Employees</h1><p class="muted">Manage your team, roles and employment details.</p></div><button class="btn btn-primary" id="employeesAddEmployee">＋ Add employee</button></div><div class="toolbar"><div class="search-box"><span>⌕</span><input id="employeeSearch" type="search" placeholder="Search by name, role or department..." /></div><div class="toolbar-actions"><button class="filter-btn">All departments <span>⌄</span></button><button class="filter-btn">Status: Active <span>⌄</span></button><button class="icon-btn bordered">⇩</button></div></div><div class="panel table-panel"><div class="table-meta"><span id="employeeCountLabel">22 employees</span><span class="muted">Demo data — add your real employees to begin</span></div><div class="table-scroll"><table><thead><tr><th>Employee</th><th>Department</th><th>Role</th><th>Employment type</th><th>Status</th><th></th></tr></thead><tbody id="employeeTableBody"></tbody></table></div></div></section>
+
+        <section class="view" id="view-attendance"><div class="page-heading compact"><div><p class="eyebrow">Time tracking</p><h1>Attendance</h1><p class="muted">Track daily attendance and working hours.</p></div><div class="heading-actions"><button class="btn btn-secondary">⇩ Export CSV</button><button class="btn btn-primary" id="markAllPresent">✓ Mark all present</button></div></div><div class="subnav-tabs"><button class="active">Today</button><button>This week</button><button>This month</button></div><div class="attendance-summary"><div class="summary-mini"><span class="summary-icon green">✓</span><div><span>Present</span><strong id="attendancePresentSummary">18</strong></div></div><div class="summary-mini"><span class="summary-icon yellow">◷</span><div><span>Late</span><strong>2</strong></div></div><div class="summary-mini"><span class="summary-icon gray">—</span><div><span>Absent</span><strong>2</strong></div></div><div class="summary-mini"><span class="summary-icon blue">⌁</span><div><span>Avg. hours</span><strong>7h 42m</strong></div></div></div><div class="panel table-panel"><div class="table-meta"><span>Monday, September 19, 2026</span><button class="filter-btn">All statuses <span>⌄</span></button></div><div class="table-scroll"><table><thead><tr><th>Employee</th><th>Clock in</th><th>Clock out</th><th>Hours</th><th>Status</th><th>Action</th></tr></thead><tbody id="attendanceTableBody"></tbody></table></div></div></section>
+
+        <section class="view" id="view-leave"><div class="page-heading compact"><div><p class="eyebrow">Time off management</p><h1>Leave requests</h1><p class="muted">Review and manage time off across your team.</p></div><button class="btn btn-primary" id="leaveRequestBtn">＋ Request leave</button></div><div class="leave-balance-grid"><div class="balance-card"><div class="balance-top"><span>Annual leave</span><span class="balance-icon blue">◫</span></div><strong>148 <small>days remaining</small></strong><div class="balance-progress"><i style="width:72%"></i></div><span class="muted">of 204 days available</span></div><div class="balance-card"><div class="balance-top"><span>Sick leave</span><span class="balance-icon peach">✚</span></div><strong>64 <small>days remaining</small></strong><div class="balance-progress peach-progress"><i style="width:85%"></i></div><span class="muted">of 75 days available</span></div><div class="balance-card"><div class="balance-top"><span>Pending approval</span><span class="balance-icon yellow">◷</span></div><strong id="pendingLeaveBalance">2 <small>requests</small></strong><div class="balance-progress yellow-progress"><i style="width:35%"></i></div><span class="muted">Needs your attention</span></div></div><div class="panel table-panel"><div class="table-meta"><span>All leave requests</span><div class="table-filters"><button class="subtle-tab active">All</button><button class="subtle-tab">Pending</button><button class="subtle-tab">Approved</button></div></div><div class="table-scroll"><table><thead><tr><th>Employee</th><th>Leave type</th><th>Dates</th><th>Duration</th><th>Reason</th><th>Status</th><th>Action</th></tr></thead><tbody id="leaveTableBody"></tbody></table></div></div></section>
+
+        <section class="view" id="view-payroll"><div class="page-heading compact"><div><p class="eyebrow">Compensation</p><h1>Payroll</h1><p class="muted">Prepare, review and manage monthly payroll.</p></div><div class="heading-actions"><button class="btn btn-secondary">⇩ Export payroll</button><button class="btn btn-primary" id="runPayrollBtn">Run September payroll</button></div></div><div class="payroll-banner"><div class="payroll-banner-icon">▤</div><div><strong>September 2026 payroll</strong><span>Pay date: September 30, 2026 · <b>Draft</b></span></div><button class="btn btn-light" id="reviewPayrollBtn">Review payroll →</button></div><div class="payroll-summary"><div><span>Gross payroll</span><strong id="payrollGross">$48,650</strong><small>Before deductions</small></div><div><span>Estimated deductions</span><strong id="payrollDeductions">$9,730</strong><small>Taxes, benefits &amp; other</small></div><div><span>Estimated net pay</span><strong id="payrollNet">$38,920</strong><small>Amount employees receive</small></div><div><span>Next pay date</span><strong>30 Sep</strong><small>11 days from today</small></div></div><div class="panel table-panel"><div class="table-meta"><div><span>September payroll</span><small class="table-subtitle">22 employees · Draft calculation</small></div><button class="filter-btn">All departments <span>⌄</span></button></div><div class="table-scroll"><table><thead><tr><th>Employee</th><th>Base salary</th><th>Allowances</th><th>Deductions</th><th>Net pay</th><th>Status</th></tr></thead><tbody id="payrollTableBody"></tbody></table></div></div></section>
+
+        <section class="view" id="view-reports"><div class="page-heading compact"><div><p class="eyebrow">Insights</p><h1>Reports</h1><p class="muted">Understand your workforce with clear, actionable summaries.</p></div><button class="btn btn-secondary">⇩ Export report</button></div><div class="report-grid"><article class="report-card report-wide"><div class="report-card-head"><div><span class="report-overline">Headcount</span><h3>Team growth</h3></div><span class="report-icon blue">♙</span></div><div class="chart-wrap"><div class="chart-y"><span>25</span><span>20</span><span>15</span><span>10</span><span>5</span><span>0</span></div><div class="chart"><div class="gridline"></div><div class="gridline"></div><div class="gridline"></div><div class="gridline"></div><div class="gridline"></div><svg viewBox="0 0 600 180" preserveAspectRatio="none" aria-label="Headcount growth chart"><defs><linearGradient id="areaFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#6d5dfc" stop-opacity=".24"/><stop offset="1" stop-color="#6d5dfc" stop-opacity="0"/></linearGradient></defs><path d="M0,143 C65,138 80,122 140,126 S215,104 270,110 S335,74 395,84 S475,54 525,61 S568,38 600,28 L600,180 L0,180 Z" fill="url(#areaFill)"/><path d="M0,143 C65,138 80,122 140,126 S215,104 270,110 S335,74 395,84 S475,54 525,61 S568,38 600,28" fill="none" stroke="#6d5dfc" stroke-width="3" vector-effect="non-scaling-stroke"/></svg><div class="chart-x"><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span></div></div></div></article><article class="report-card"><div class="report-card-head"><div><span class="report-overline">Departments</span><h3>Team distribution</h3></div><span class="report-icon green">◒</span></div><div class="distribution"><div class="distribution-donut"></div><div class="distribution-legend"><span><i class="dot dot-purple"></i>Design <b>7</b></span><span><i class="dot dot-green"></i>Engineering <b>6</b></span><span><i class="dot dot-blue"></i>Marketing <b>5</b></span><span><i class="dot dot-yellow"></i>Operations <b>4</b></span></div></div></article><article class="report-card"><div class="report-card-head"><div><span class="report-overline">Retention</span><h3>Turnover rate</h3></div><span class="report-icon peach">↗</span></div><div class="retention-value"><strong>4.6%</strong><span class="trend up">↘ 1.2% vs last year</span></div><div class="mini-bars"><i style="height:50%"></i><i style="height:72%"></i><i style="height:45%"></i><i style="height:64%"></i><i style="height:38%"></i><i style="height:31%"></i><i style="height:28%"></i><i style="height:22%"></i></div><div class="mini-bar-labels"><span>Jan</span><span>Aug</span></div></article></div></section>
+
+        <section class="view" id="view-users"><div class="page-heading compact"><div><p class="eyebrow">Access control</p><h1>Users &amp; permissions</h1><p class="muted">Control who can access HR data and what they can do.</p></div><button class="btn btn-secondary" id="refreshUsers">↻ Refresh users</button></div><div class="permissions-grid"><article class="permission-card"><span class="role-badge role-super">Super Admin</span><strong>Full workspace access</strong><p>Manage users, settings, payroll, reports and all HR records.</p></article><article class="permission-card"><span class="role-badge role-hr">HR Admin</span><strong>People operations</strong><p>Manage employees, attendance, leave, payroll and workspace settings.</p></article><article class="permission-card"><span class="role-badge role-manager">Manager</span><strong>Team oversight</strong><p>View employees, review attendance and approve team leave.</p></article><article class="permission-card"><span class="role-badge role-employee">Employee</span><strong>Self-service</strong><p>Access personal leave, attendance and payroll information.</p></article></div><div class="panel table-panel"><div class="table-meta"><div><span>Workspace users</span><small class="table-subtitle">Change a user's role or suspend access</small></div><span class="muted" id="usersCountLabel"></span></div><div class="table-scroll"><table><thead><tr><th>User</th><th>Role</th><th>Status</th><th>Last login</th><th>Action</th></tr></thead><tbody id="usersTableBody"></tbody></table></div></div></section>
+
+        <section class="view" id="view-settings"><div class="page-heading compact"><div><p class="eyebrow">Workspace preferences</p><h1>Settings</h1><p class="muted">Configure your company workspace and payroll defaults.</p></div><button class="btn btn-primary" id="saveSettings">Save changes</button></div><div class="settings-layout"><div class="settings-nav"><button class="active">Company profile</button><button>Payroll settings</button><button>Leave policies</button><button>Notifications</button><button>Roles &amp; permissions</button></div><div class="panel settings-panel"><div class="settings-section"><h2>Company profile</h2><p class="muted">Basic details used across your HR workspace.</p><div class="form-grid"><label>Company name<input id="companyName" value="Northstar Studio" /></label><label>Industry<select id="companyIndustry"><option>Creative &amp; Design</option><option>Technology</option><option>Professional services</option></select></label><label>Work email domain<input id="companyDomain" value="northstar.studio" /></label><label>Company size<select><option>1–50 employees</option><option>51–200 employees</option></select></label></div></div><div class="settings-section"><h2>Payroll defaults</h2><p class="muted">These are demo defaults and should be verified for your country.</p><div class="form-grid"><label>Currency<select id="companyCurrency"><option value="USD">USD — US Dollar</option><option value="TZS">TZS — Tanzanian Shilling</option><option value="KES">KES — Kenyan Shilling</option></select></label><label>Pay frequency<select id="payFrequency"><option>Monthly</option><option>Bi-weekly</option></select></label></div><div class="settings-warning"><span>!</span><div><strong>Payroll compliance reminder</strong><p>Connect a payroll provider or configure local tax, pension and statutory deduction rules before using this for live payroll.</p></div></div></div></div></div></section>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="employeeModal" aria-hidden="true"><div class="modal"><div class="modal-header"><div><p class="eyebrow">People directory</p><h2>Add employee</h2><p class="muted">Create a new employee profile.</p></div><button class="modal-close" data-close-modal="employeeModal">×</button></div><form id="employeeForm"><div class="form-grid"><label>Full name<input name="name" required placeholder="e.g. Taylor Smith" /></label><label>Work email<input name="email" type="email" required placeholder="name@company.com" /></label><label>Department<select name="department"><option>Design</option><option>Engineering</option><option>Marketing</option><option>Operations</option></select></label><label>Role<input name="role" required placeholder="e.g. Product Designer" /></label><label>Employment type<select name="type"><option>Full-time</option><option>Part-time</option><option>Contractor</option></select></label><label>Monthly salary<input name="salary" type="number" min="0" required placeholder="4500" /></label></div><div class="modal-actions"><button type="button" class="btn btn-secondary" data-close-modal="employeeModal">Cancel</button><button class="btn btn-primary" type="submit">Add employee</button></div></form></div></div>
+  <div class="modal-backdrop" id="leaveModal" aria-hidden="true"><div class="modal modal-small"><div class="modal-header"><div><p class="eyebrow">Time off management</p><h2>Request leave</h2><p class="muted">Submit a leave request for review.</p></div><button class="modal-close" data-close-modal="leaveModal">×</button></div><form id="leaveForm"><div class="form-grid"><label>Employee<select name="employee" id="leaveEmployeeSelect"></select></label><label>Leave type<select name="leaveType"><option>Annual leave</option><option>Sick leave</option><option>Personal leave</option></select></label><label>Start date<input name="start" type="date" required /></label><label>End date<input name="end" type="date" required /></label><label class="full-span">Reason<textarea name="reason" rows="3" placeholder="Add a note (optional)"></textarea></label></div><div class="modal-actions"><button type="button" class="btn btn-secondary" data-close-modal="leaveModal">Cancel</button><button class="btn btn-primary" type="submit">Submit request</button></div></form></div></div>
+  <div class="toast" id="toast"><span class="toast-check">✓</span><span id="toastMessage">Changes saved</span></div>
+  <script src="app.js"></script>
+</body>
+</html>
